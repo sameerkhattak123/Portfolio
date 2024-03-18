@@ -1,0 +1,41 @@
+{
+  "skills": [
+    {
+      "id": "1",
+      "src": "./img/mern1.png",
+      "title": "MERN",
+      "description": "Intermediate in MERN: Skilled with MongoDB, Express.js, React.js, and Node.js. Building dynamic web applications with confidence"
+    },
+    {
+      "id": "2",
+      "src": "./img/sql.png",
+      "title": "Relational Databases",
+      "description": "Intermediate in relational database design and SQL, with hands-on experience in MySQL and Oracle. Proficient in crafting efficient database solutions for various applications"
+    },
+    {
+      "id": "3",
+      "src": "./img/unity.png",
+      "title": "Unity",
+      "description": "Intermediate in Unity game development, with hands-on experience in crafting engaging and immersive gaming experiences. Proficient in utilizing Unity's features and tools to create dynamic and interactive games"
+    },
+    {
+      "id": "4",
+      "src": "./img/flutter.png",
+      "title": "Flutter",
+      "description": "Beginner in Flutter, eager to explore its capabilities and develop cross-platform mobile applications. Excited to learn and contribute to the vibrant Flutter community"
+    }
+  ],
+  "portfolio": [
+    {
+      "id": "1",
+      "src": "./img/qlms.png",
+      "title": "Quran Translation Teaching Managment System",
+      "description": "This comprehensive system has been developed to enhance the learning experience for users, offering a variety of modules such as Quiz, Assignment, Course Content, and the ability to read translations of the Quran. With multiple translator options, users can gain a deeper understanding of the conten",
+      "link": "https://quran-lms-umber.vercel.app/"
+    }
+      
+      
+    
+  ]
+
+}
