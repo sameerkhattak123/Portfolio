@@ -23,7 +23,20 @@
       "src": "./img/flutter.png",
       "title": "Flutter",
       "description": "Beginner in Flutter, eager to explore its capabilities and develop cross-platform mobile applications. Excited to learn and contribute to the vibrant Flutter community"
+    },
+    {
+      "id": "5",
+      "src": "./img/AI.webp",
+      "title": "AI/Machine Learning ",
+      "description": "Mastering Machine Learning with Python, I build accurate models, perform robust analyses, and solve diverse challenges using advanced techniques like NLP, Deep Learning, and Dimensionality Reduction, creating strong value in real-world applications"
+    },
+    {
+      "id": "6",
+      "src": "./img/laravel.png",
+      "title": "Laravel",
+      "description": "Gained experience in Laravel through a project, developing web applications, managing databases, and building APIs. Focused on creating maintainable backend systems and effective web solutions"
     }
+
   ],
   "portfolio": [
     {

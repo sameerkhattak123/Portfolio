@@ -255,8 +255,8 @@ h2 {
   display: grid;
   justify-content: center;
   align-items: flex-start;
-  gap: 42.6px;
-  grid-template-columns: repeat(4, 1fr);
+  gap: 12.6px;
+  grid-template-columns: repeat(3, 1fr);
 }
 .skills--section--card {
   display: flex;
@@ -268,6 +268,7 @@ h2 {
   border-radius: 10.6px;
   background: var(--bg-shade);
   min-height: 250px;
+  height: 400px;
 }
 .skills--section--card:hover {
   border-bottom: 4px solid var(--primary);
@@ -610,7 +611,7 @@ input[type="checkbox"] {
     line-height: 70px;
   }
   .skills--section--container {
-    gap: 16px;
+    gap: 10px;
   }
   .skills--section--card {
     gap: 28px;
