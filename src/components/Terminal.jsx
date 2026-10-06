@@ -10,6 +10,7 @@ import {
 } from "../data/profile";
 import { yearsSince } from "../hooks";
 import { prefersReducedMotion } from "../motion";
+import { CHUNKS, retrieve } from "../ai/rag";
 
 const PROMPT = "sameer@portfolio:~$";
 
@@ -24,6 +25,7 @@ const FILES = {
 };
 
 const HELP = [
+  ["ask <question>", "RAG search over my CV"],
   ["whoami", "who I am"],
   ["about", "a short intro"],
   ["experience", "where I've worked"],
@@ -39,6 +41,7 @@ const HELP = [
 
 const COMMANDS = [
   "help",
+  "ask",
   "whoami",
   "about",
   "experience",
@@ -60,9 +63,9 @@ const COMMANDS = [
 const SUGGESTIONS = [
   "help",
   "whoami",
+  "ask has he used aws?",
   "projects",
   "skills",
-  "contact",
   "sudo hire-me",
 ];
 
@@ -82,6 +85,18 @@ function run(raw) {
         { t: "Available commands:", cls: "muted" },
         ...HELP.map(([k, v]) => ({ t: `  ${k.padEnd(20)}${v}` })),
       ];
+    case "ask": {
+      const q = args.join(" ");
+      if (!q) return [{ t: "usage: ask <question>  e.g. ask what ai tools does he use?", cls: "muted" }];
+      const r = retrieve(q);
+      return [
+        { t: `↳ retrieved ${r.hits.length} of ${CHUNKS.length} chunks (cosine similarity)`, cls: "muted" },
+        ...r.answer.map((l) => ({
+          t: l.cite ? `[${l.cite}] ${l.t}  (${r.hits[l.cite - 1].score.toFixed(2)})` : l.t,
+          cls: l.cite ? "" : "accent",
+        })),
+      ];
+    }
     case "whoami":
       return [
         { t: `${profile.name} · ${profile.role}`, cls: "accent" },
@@ -275,7 +290,7 @@ export default function Terminal() {
   return (
     <Section
       id="terminal"
-      index="05"
+      index="06"
       label="Terminal"
       title={
         <>

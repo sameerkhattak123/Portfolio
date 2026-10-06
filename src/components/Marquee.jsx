@@ -11,6 +11,10 @@ const ITEMS = [
   "REST APIs",
   "Tailwind CSS",
   "LangGraph",
+  "RAG",
+  "Embeddings",
+  "OpenAI API",
+  "Pinecone",
   "Express",
   "Power Platform",
 ];

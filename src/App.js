@@ -11,6 +11,7 @@ import Cursor from "./components/Cursor";
 import BootLoader from "./components/BootLoader";
 import CommandPalette from "./components/CommandPalette";
 import Terminal from "./components/Terminal";
+import AILab from "./components/AILab";
 import { useRevealOnScroll } from "./hooks";
 import { useEffect } from "react";
 import { usePointerEffects, useScrollProgress } from "./motion";
@@ -45,6 +46,7 @@ export default function App() {
         <About />
         <Experience />
         <Projects />
+        <AILab />
         <Skills />
         <Terminal />
         <Contact />

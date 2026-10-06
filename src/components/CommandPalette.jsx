@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import {
   FiArrowRight,
+  FiCpu,
   FiCopy,
   FiDownload,
   FiGithub,
@@ -44,6 +45,12 @@ export default function CommandPalette() {
         label: "Selected work",
         icon: FiArrowRight,
         run: () => go("work"),
+      },
+      {
+        group: "Navigate",
+        label: "AI engineering · Ask my CV",
+        icon: FiCpu,
+        run: () => go("ai"),
       },
       {
         group: "Navigate",
