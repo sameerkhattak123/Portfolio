@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import { FiArrowUpRight } from "react-icons/fi";
 import { profile } from "../data/profile";
+import { openPalette } from "./CommandPalette";
+
+const isMac = typeof navigator !== "undefined" && /Mac|iPhone|iPad/.test(navigator.platform);
 
 const LINKS = [
   { id: "about", label: "About" },
@@ -81,6 +84,18 @@ export default function Navbar() {
                 {label}
               </a>
             ))}
+            <button
+              type="button"
+              className="nav__kbd magnetic"
+              onClick={() => {
+                setOpen(false);
+                openPalette();
+              }}
+              aria-label="Open command palette"
+            >
+              <kbd>{isMac ? "⌘" : "Ctrl"}</kbd>
+              <kbd>K</kbd>
+            </button>
             <a
               className="btn btn--dark btn--sm magnetic"
               href={profile.cv}

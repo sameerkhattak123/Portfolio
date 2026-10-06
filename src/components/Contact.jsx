@@ -14,7 +14,7 @@ export default function Contact() {
     <section id="contact" className="contact" data-progress="enter" data-start="1" data-end="0.2">
       <div className="container">
         <p className="label" data-reveal>
-          <span className="section__index">05</span> Contact
+          <span className="section__index">06</span> Contact
         </p>
         <h2 className="contact__title" data-reveal style={{ "--d": "0.06s" }}>
           Have a project or role in mind? <em>Let's talk.</em>
