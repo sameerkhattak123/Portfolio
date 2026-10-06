@@ -1,23 +1,31 @@
 import "./App.css";
-import React from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Navbar from "./Pages/Home/Navbar";
-import Home from "./Pages/Home/Homescreen";
+import Navbar from "./components/Navbar";
+import Hero from "./components/Hero";
+import About from "./components/About";
+import Experience from "./components/Experience";
+import Projects from "./components/Projects";
+import Skills from "./components/Skills";
+import Contact from "./components/Contact";
+import { profile } from "./data/profile";
 
-function App() {
+export default function App() {
   return (
-    <div className="App">
-      <Router>
-        <div>
-          <Navbar />
-          <Routes>
-            <Route path="/" element={<Home />}></Route>
-            <Route path="*" element={<div>404 Not Found</div>}></Route>
-          </Routes>
-        </div>
-      </Router>
-    </div>
+    <>
+      <a className="skip-link" href="#about">
+        Skip to content
+      </a>
+      <Navbar />
+      <main>
+        <Hero />
+        <About />
+        <Experience />
+        <Projects />
+        <Skills />
+        <Contact />
+      </main>
+      <footer className="footer mono">
+        Designed &amp; built by {profile.name} · {new Date().getFullYear()}
+      </footer>
+    </>
   );
 }
-
-export default App;

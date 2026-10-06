@@ -1,31 +1,16 @@
-# Getting Started with Create React App
+# Sameer Rehman · Portfolio
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Personal developer portfolio built with React (Create React App). Live at https://portfolio-rosy-psi-97.vercel.app
 
-## Available Scripts
+## Updating content
 
-In the project directory, you can run:
+All content lives in **`src/data/profile.js`** (experience, projects, skills, certifications, education).
+The downloadable CV is **`public/Sameer-Rehman-CV-v1.pdf`**. Replace the file and update `profile.cv` when you publish a new version.
 
-### `npm start`
+## Scripts
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
+```bash
+npm install
+npm start       # dev server on http://localhost:3000
+npm run build   # production build in ./build
+```
