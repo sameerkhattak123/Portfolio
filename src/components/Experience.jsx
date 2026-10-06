@@ -18,6 +18,7 @@ export default function Experience() {
           <li
             key={job.company}
             className="job"
+            data-spotlight
             data-reveal
             style={{ "--d": `${i * 0.06}s` }}
           >

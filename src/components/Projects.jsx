@@ -22,12 +22,15 @@ export default function Projects() {
           <article
             key={p.title}
             className={`work__card ${p.image ? "work__card--image" : ""}`}
+            data-tilt="4"
             data-reveal
             style={{ "--d": `${i * 0.08}s` }}
           >
             {p.image ? (
               <a
                 className="work__media"
+                data-progress="through"
+                data-cursor="View"
                 href={p.live}
                 target="_blank"
                 rel="noreferrer"

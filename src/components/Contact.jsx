@@ -11,7 +11,7 @@ export default function Contact() {
   ];
 
   return (
-    <section id="contact" className="contact">
+    <section id="contact" className="contact" data-progress="enter" data-start="1" data-end="0.2">
       <div className="container">
         <p className="label" data-reveal>
           <span className="section__index">05</span> Contact
@@ -20,7 +20,8 @@ export default function Contact() {
           Have a project or role in mind? <em>Let's talk.</em>
         </h2>
         <a
-          className="contact__email"
+          className="contact__email magnetic"
+          data-strength="0.12"
           href={`mailto:${profile.email}`}
           data-reveal
           style={{ "--d": "0.12s" }}

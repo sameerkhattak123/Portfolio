@@ -20,7 +20,7 @@ export default function Hero() {
   const current = experience[0];
 
   return (
-    <section className="hero" id="top">
+    <section className="hero" id="top" data-progress="exit">
       <div className="container hero__grid">
         <div className="hero__text">
           <p className="label hero__label anim" style={{ "--d": "0.05s" }}>
@@ -51,19 +51,19 @@ export default function Hero() {
 
           <div className="hero__cta anim" style={{ "--d": "0.62s" }}>
             <a
-              className="btn btn--dark"
+              className="btn btn--dark magnetic"
               href={profile.cv}
               download="Sameer-Rehman-CV-v1.pdf"
             >
               <FiDownload aria-hidden /> Download résumé
             </a>
-            <a className="btn btn--line" href="#work">
+            <a className="btn btn--line magnetic" href="#work">
               View selected work <FiArrowDown aria-hidden />
             </a>
           </div>
         </div>
 
-        <figure className="hero__portrait">
+        <figure className="hero__portrait" data-tilt="10">
           <div className="portrait">
             <img
               src={profile.photo}

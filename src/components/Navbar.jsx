@@ -58,7 +58,7 @@ export default function Navbar() {
       >
         <div className="nav__inner">
           <a href="#top" className="nav__brand" onClick={() => setOpen(false)}>
-            <span className="nav__mark" aria-hidden>
+            <span className="nav__mark magnetic" data-strength="0.4" aria-hidden>
               SR
             </span>
             <span>
@@ -82,7 +82,7 @@ export default function Navbar() {
               </a>
             ))}
             <a
-              className="btn btn--dark btn--sm"
+              className="btn btn--dark btn--sm magnetic"
               href={profile.cv}
               target="_blank"
               rel="noreferrer"

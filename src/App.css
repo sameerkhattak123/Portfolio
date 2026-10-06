@@ -574,11 +574,7 @@ em {
 .marquee__track {
   display: flex;
   width: max-content;
-  animation: scroll-x 45s linear infinite;
-}
-
-.marquee:hover .marquee__track {
-  animation-play-state: paused;
+  will-change: transform;
 }
 
 .marquee__item {
@@ -599,11 +595,6 @@ em {
   color: var(--accent);
 }
 
-@keyframes scroll-x {
-  to {
-    transform: translateX(-50%);
-  }
-}
 
 /* ---------- sections ---------- */
 .section {
@@ -1196,6 +1187,207 @@ em {
   }
   .footer {
     flex-direction: column;
+  }
+}
+
+/* ---------- interactive motion ---------- */
+
+/* custom cursor (fine pointers only; enabled from JS) */
+.has-cursor,
+.has-cursor * {
+  cursor: none !important;
+}
+
+.cursor-dot,
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 300;
+  pointer-events: none;
+  border-radius: 50%;
+}
+
+.cursor-dot {
+  width: 6px;
+  height: 6px;
+  margin: -3px 0 0 -3px;
+  background: var(--accent);
+  transition: opacity 0.2s;
+}
+
+.cursor-ring {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  margin: -19px 0 0 -19px;
+  border: 1px solid #fff;
+  mix-blend-mode: difference;
+  transition:
+    width 0.35s var(--ease),
+    height 0.35s var(--ease),
+    margin 0.35s var(--ease),
+    background-color 0.35s var(--ease),
+    border-color 0.35s var(--ease),
+    opacity 0.3s;
+}
+
+.cursor-ring span {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--bg);
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.cursor-ring.is-link {
+  width: 64px;
+  height: 64px;
+  margin: -32px 0 0 -32px;
+  background: #fff;
+}
+
+.cursor-ring.is-label {
+  mix-blend-mode: normal;
+  width: 92px;
+  height: 92px;
+  margin: -46px 0 0 -46px;
+  border-color: var(--ink);
+  background: var(--ink);
+}
+
+.cursor-ring.is-label span {
+  opacity: 1;
+}
+
+.cursor-dot.is-label,
+.cursor-dot.is-hidden,
+.cursor-ring.is-hidden {
+  opacity: 0;
+}
+
+.cursor-ring.is-down {
+  width: 28px;
+  height: 28px;
+  margin: -14px 0 0 -14px;
+}
+
+/* magnetic elements ease back into place */
+.magnetic {
+  transition:
+    translate 0.5s var(--ease),
+    background-color 0.35s var(--ease),
+    color 0.35s var(--ease),
+    border-color 0.35s var(--ease),
+    transform 0.35s var(--ease);
+}
+
+/* 3D tilt + glare */
+[data-tilt] {
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+[data-tilt].is-tilting {
+  transition:
+    transform 0.12s linear,
+    box-shadow 0.6s var(--ease);
+}
+
+.work__card {
+  position: relative;
+}
+
+.work__card::after,
+.portrait::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: radial-gradient(
+    circle at var(--mx, 50%) var(--my, 50%),
+    rgba(255, 255, 255, 0.35),
+    transparent 45%
+  );
+  opacity: 0;
+  transition: opacity 0.4s var(--ease);
+}
+
+.work__card.is-tilting::after,
+.hero__portrait.is-tilting .portrait::after {
+  opacity: 1;
+}
+
+.portrait {
+  position: relative;
+}
+
+.hero__portrait.is-tilting .portrait__card {
+  translate: 0 0 60px;
+}
+
+.portrait__card {
+  transition: translate 0.6s var(--ease);
+}
+
+/* spotlight that follows the cursor across experience rows */
+.job::before {
+  background: radial-gradient(
+      420px circle at var(--mx, 50%) var(--my, 50%),
+      rgba(155, 74, 37, 0.07),
+      transparent 70%
+    ),
+    var(--surface);
+}
+
+/* hero drifts away as you scroll past it */
+.hero__text {
+  translate: 0 calc(var(--p, 0) * -90px);
+  opacity: calc(1 - var(--p, 0) * 1.1);
+}
+
+.hero__portrait {
+  translate: 0 calc(var(--p, 0) * 70px);
+}
+
+.hero__portrait .portrait img {
+  scale: calc(1 + var(--p, 0) * 0.12);
+}
+
+/* project screenshot parallax */
+.work__media[data-progress] img {
+  scale: 1.12;
+  translate: 0 calc((var(--p, 0.5) - 0.5) * -40px);
+}
+
+/* Apple-style statement that fills in word by word */
+.scrub span {
+  opacity: clamp(0.14, calc(var(--p, 1) * (var(--n) + 6) - var(--i)), 1);
+  transition: opacity 0.15s linear;
+}
+
+/* contact panel expands to full bleed as it arrives */
+.contact {
+  clip-path: inset(
+    0 calc((1 - var(--p, 1)) * 4vw) 0 round calc((1 - var(--p, 1)) * 56px)
+      calc((1 - var(--p, 1)) * 56px) 0 0
+  );
+}
+
+.contact__title {
+  translate: 0 calc((1 - var(--p, 1)) * 60px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scrub span {
+    opacity: 1;
+  }
+  .contact {
+    clip-path: none;
   }
 }
 

@@ -9,6 +9,7 @@ import {
 import { yearsSince } from "../hooks";
 
 export default function About() {
+  const statement = profile.about[0].split(" ");
   const facts = [
     ["Based in", profile.location],
     ["Experience", `${yearsSince(profile.careerStart)}+ years professional`],
@@ -31,7 +32,20 @@ export default function About() {
     >
       <div className="about">
         <div className="about__text">
-          {profile.about.map((p, i) => (
+          <p
+            className="scrub"
+            data-progress="enter"
+            data-start="0.92"
+            data-end="0.4"
+            style={{ "--n": statement.length }}
+          >
+            {statement.map((w, i) => (
+              <span key={i} style={{ "--i": i }}>
+                {w}{" "}
+              </span>
+            ))}
+          </p>
+          {profile.about.slice(1).map((p, i) => (
             <p key={i} data-reveal style={{ "--d": `${i * 0.08}s` }}>
               {p}
             </p>
