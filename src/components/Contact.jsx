@@ -1,59 +1,77 @@
-import {
-  FiDownload,
-  FiGithub,
-  FiLinkedin,
-  FiMail,
-  FiPhone,
-} from "react-icons/fi";
+import { FiArrowUpRight } from "react-icons/fi";
 import { profile } from "../data/profile";
+import { useLocalTime } from "../hooks";
 
 export default function Contact() {
-  return (
-    <section id="contact" className="section contact">
-      <div className="container contact__inner">
-        <p className="mono accent">05. What's next?</p>
-        <h2 className="contact__title">Let's build something together.</h2>
-        <p className="muted contact__lead">
-          I'm open to new opportunities and collaborations, from full-stack
-          product work to integrations and AI-powered features. My inbox is
-          always open.
-        </p>
-        <div className="hero__cta center">
-          <a className="btn btn--primary" href={`mailto:${profile.email}`}>
-            <FiMail aria-hidden /> Say hello
-          </a>
-          <a
-            className="btn btn--ghost"
-            href={profile.cv}
-            download="Sameer-Rehman-CV-v1.pdf"
-          >
-            <FiDownload aria-hidden /> Download CV
-          </a>
-        </div>
+  const time = useLocalTime();
+  const links = [
+    ["LinkedIn", profile.socials.linkedin],
+    ["GitHub", profile.socials.github],
+    ["Résumé", profile.cv],
+  ];
 
-        <ul className="contact__list mono">
-          <li>
-            <a href={`mailto:${profile.email}`}>
-              <FiMail aria-hidden /> {profile.email}
+  return (
+    <section id="contact" className="contact">
+      <div className="container">
+        <p className="label" data-reveal>
+          <span className="section__index">05</span> Contact
+        </p>
+        <h2 className="contact__title" data-reveal style={{ "--d": "0.06s" }}>
+          Have a project or role in mind? <em>Let's talk.</em>
+        </h2>
+        <a
+          className="contact__email"
+          href={`mailto:${profile.email}`}
+          data-reveal
+          style={{ "--d": "0.12s" }}
+        >
+          {profile.email}
+          <FiArrowUpRight aria-hidden />
+        </a>
+
+        <div className="contact__grid" data-reveal style={{ "--d": "0.18s" }}>
+          <div>
+            <p className="label">Phone</p>
+            <a
+              className="link"
+              href={`tel:${profile.phone.replace(/\s/g, "")}`}
+            >
+              {profile.phone}
             </a>
-          </li>
-          <li>
-            <a href={`tel:${profile.phone.replace(/\s/g, "")}`}>
-              <FiPhone aria-hidden /> {profile.phone}
-            </a>
-          </li>
-          <li>
-            <a href={profile.socials.linkedin} target="_blank" rel="noreferrer">
-              <FiLinkedin aria-hidden /> /in/sameer-rehmank
-            </a>
-          </li>
-          <li>
-            <a href={profile.socials.github} target="_blank" rel="noreferrer">
-              <FiGithub aria-hidden /> /sameerkhattak123
-            </a>
-          </li>
-        </ul>
+          </div>
+          <div>
+            <p className="label">Location</p>
+            <p>
+              {profile.location} · {time}
+            </p>
+          </div>
+          <div>
+            <p className="label">Elsewhere</p>
+            <p className="contact__links">
+              {links.map(([label, href]) => (
+                <a
+                  key={label}
+                  className="link"
+                  href={href}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  {label} <FiArrowUpRight aria-hidden />
+                </a>
+              ))}
+            </p>
+          </div>
+        </div>
       </div>
+
+      <footer className="container footer label rule-top">
+        <span>
+          © {new Date().getFullYear()} {profile.name}
+        </span>
+        <a className="link" href="#top">
+          Back to top ↑
+        </a>
+      </footer>
     </section>
   );
 }

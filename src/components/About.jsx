@@ -1,39 +1,55 @@
 import Section from "./Section";
-import { education, extras, languages, profile } from "../data/profile";
+import {
+  education,
+  experience,
+  extras,
+  languages,
+  profile,
+} from "../data/profile";
+import { yearsSince } from "../hooks";
 
 export default function About() {
+  const facts = [
+    ["Based in", profile.location],
+    ["Experience", `${yearsSince(profile.careerStart)}+ years professional`],
+    ["Currently", `${experience[0].role}, ${experience[0].company}`],
+    ["Education", `${education.degree}, COMSATS`],
+    ["Scholarship", "PEEF, full four-year degree"],
+    ["Languages", languages.join(", ")],
+  ];
+
   return (
-    <Section id="about" index={1} title="About me">
+    <Section
+      id="about"
+      index="01"
+      label="About"
+      title={
+        <>
+          Pragmatic engineering, <em>thoughtful</em> delivery.
+        </>
+      }
+    >
       <div className="about">
         <div className="about__text">
-          {profile.about.map((p) => (
-            <p key={p.slice(0, 20)}>{p}</p>
+          {profile.about.map((p, i) => (
+            <p key={i} data-reveal style={{ "--d": `${i * 0.08}s` }}>
+              {p}
+            </p>
           ))}
-          <p>
-            Outside of work: chess, guitar, puzzles and speed-cubing. I speak{" "}
-            {languages.join(", ")}.
+          <p data-reveal style={{ "--d": "0.16s" }}>
+            Off the clock: {extras[0].title.toLowerCase()} for {extras[0].org},
+            plus chess, guitar and puzzle-solving.
           </p>
         </div>
 
-        <aside className="card about__facts">
-          <h3 className="mono card__label">// education</h3>
-          <p className="about__school">{education.degree}</p>
-          <p className="muted">{education.school}</p>
-          <p className="mono muted small">{education.period}</p>
-          <ul className="ticks">
-            {education.notes.map((n) => (
-              <li key={n}>{n}</li>
-            ))}
-          </ul>
-
-          <h3 className="mono card__label">// leadership</h3>
-          {extras.map((x) => (
-            <div key={x.title}>
-              <p className="about__school">{x.title}</p>
-              <p className="muted">{x.org}</p>
+        <dl className="facts" data-reveal style={{ "--d": "0.1s" }}>
+          {facts.map(([k, v]) => (
+            <div key={k} className="facts__row">
+              <dt className="label">{k}</dt>
+              <dd>{v}</dd>
             </div>
           ))}
-        </aside>
+        </dl>
       </div>
     </Section>
   );

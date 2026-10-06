@@ -1,39 +1,48 @@
 import { useEffect, useState } from "react";
-import { FiDownload, FiMenu, FiX } from "react-icons/fi";
+import { FiArrowUpRight } from "react-icons/fi";
 import { profile } from "../data/profile";
 
 const LINKS = [
   { id: "about", label: "About" },
   { id: "experience", label: "Experience" },
-  { id: "projects", label: "Projects" },
+  { id: "work", label: "Work" },
   { id: "skills", label: "Skills" },
   { id: "contact", label: "Contact" },
 ];
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
-  const [active, setActive] = useState("");
+  const [hidden, setHidden] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [active, setActive] = useState("");
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 12);
+    let lastY = window.scrollY;
+    const bar = document.querySelector(".progress");
+    const onScroll = () => {
+      const y = window.scrollY;
+      setScrolled(y > 20);
+      setHidden(y > 400 && y > lastY);
+      lastY = y;
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      if (bar) bar.style.transform = `scaleX(${max > 0 ? y / max : 0})`;
+    };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((e) => e.isIntersecting && setActive(e.target.id));
-      },
+    const io = new IntersectionObserver(
+      (entries) =>
+        entries.forEach((e) => e.isIntersecting && setActive(e.target.id)),
       { rootMargin: "-45% 0px -50% 0px" },
     );
-    LINKS.forEach(({ id }) => {
+    ["top", ...LINKS.map((l) => l.id)].forEach((id) => {
       const el = document.getElementById(id);
-      if (el) observer.observe(el);
+      if (el) io.observe(el);
     });
 
     return () => {
       window.removeEventListener("scroll", onScroll);
-      observer.disconnect();
+      io.disconnect();
     };
   }, []);
 
@@ -42,42 +51,57 @@ export default function Navbar() {
   }, [open]);
 
   return (
-    <header className={`nav ${scrolled ? "nav--scrolled" : ""}`}>
-      <div className="nav__inner">
-        <a href="#top" className="nav__logo" onClick={() => setOpen(false)}>
-          <span className="accent">&lt;</span>sameer
-          <span className="accent">/&gt;</span>
-        </a>
-
-        <nav
-          className={`nav__links ${open ? "is-open" : ""}`}
-          aria-label="Primary"
-        >
-          {LINKS.map(({ id, label }, i) => (
-            <a
-              key={id}
-              href={`#${id}`}
-              className={active === id ? "is-active" : ""}
-              onClick={() => setOpen(false)}
-            >
-              <span className="nav__num">0{i + 1}.</span>
-              {label}
-            </a>
-          ))}
-          <a className="btn btn--ghost btn--sm" href={profile.cv} download>
-            <FiDownload aria-hidden /> CV
+    <>
+      <div className="progress" aria-hidden />
+      <header
+        className={`nav ${scrolled ? "nav--scrolled" : ""} ${hidden && !open ? "nav--hidden" : ""}`}
+      >
+        <div className="nav__inner">
+          <a href="#top" className="nav__brand" onClick={() => setOpen(false)}>
+            <span className="nav__mark" aria-hidden>
+              SR
+            </span>
+            <span>
+              {profile.name}
+              <small>{profile.role}</small>
+            </span>
           </a>
-        </nav>
 
-        <button
-          className="nav__toggle"
-          aria-label={open ? "Close menu" : "Open menu"}
-          aria-expanded={open}
-          onClick={() => setOpen((o) => !o)}
-        >
-          {open ? <FiX /> : <FiMenu />}
-        </button>
-      </div>
-    </header>
+          <nav
+            className={`nav__links ${open ? "is-open" : ""}`}
+            aria-label="Primary"
+          >
+            {LINKS.map(({ id, label }) => (
+              <a
+                key={id}
+                href={`#${id}`}
+                className={`link ${active === id ? "is-active" : ""}`}
+                onClick={() => setOpen(false)}
+              >
+                {label}
+              </a>
+            ))}
+            <a
+              className="btn btn--dark btn--sm"
+              href={profile.cv}
+              target="_blank"
+              rel="noreferrer"
+            >
+              Résumé <FiArrowUpRight aria-hidden />
+            </a>
+          </nav>
+
+          <button
+            className={`nav__toggle ${open ? "is-open" : ""}`}
+            aria-label={open ? "Close menu" : "Open menu"}
+            aria-expanded={open}
+            onClick={() => setOpen((o) => !o)}
+          >
+            <span />
+            <span />
+          </button>
+        </div>
+      </header>
+    </>
   );
 }

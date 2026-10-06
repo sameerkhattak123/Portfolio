@@ -1,16 +1,13 @@
-export default function Section({
-  id,
-  index,
-  title,
-  children,
-  className = "",
-}) {
+export default function Section({ id, index, label, title, children }) {
   return (
-    <section id={id} className={`section ${className}`}>
+    <section id={id} className="section">
       <div className="container">
-        <h2 className="section__title">
-          <span className="mono accent">0{index}.</span> {title}
-        </h2>
+        <header className="section__head" data-reveal>
+          <p className="label">
+            <span className="section__index">{index}</span> {label}
+          </p>
+          <h2 className="section__title">{title}</h2>
+        </header>
         {children}
       </div>
     </section>

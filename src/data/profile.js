@@ -11,7 +11,7 @@ export const profile = {
   phone: "+92 309 4863152",
   cv: "/Sameer-Rehman-CV-v1.pdf",
   careerStart: "2024-06-01",
-  photo: "/img/sameer.webp",
+  photo: "/img/portrait.webp",
   socials: {
     github: "https://github.com/sameerkhattak123",
     linkedin: "https://www.linkedin.com/in/sameer-rehmank/",
